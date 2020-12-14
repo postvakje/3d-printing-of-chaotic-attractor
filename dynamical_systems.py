@@ -62,8 +62,8 @@ class rucklidge(dynamical_system):
         return y
     
 class nonauto_chaotic_system(dynamical_system):
-    """ nonautonomous dynamical system with a chaotic attractor driving by a 
-        sinusoidal signal. 
+    """ nonautonomous dynamical system driven by a 
+        sinusoidal signal with a chaotic attractor. 
         C. W. Wu, G.-Q. Zhong and L. O. Chua, 
         "Synchronizing nonautonomous chaotic systems without phase-locking," 
         Journal of Circuits, Systems, and Computers, vol. 6, no. 3, pp. 227-241, 1996.  
