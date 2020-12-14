@@ -1,10 +1,10 @@
 # 3d-printing-of-chaotic-attractor
-Python port of the MATLAB file `runrucklidge.m` from "Modeling Dynamical Systems for 3D Printing”, Notices of the AMS, 2020 by Stephen K. Lucas, Evelyn Sander, and Laura Taalman and available at http://math.gmu.edu/~sander/EvelynSite/supplementary-materials-for.html
+Python port of the MATLAB file `runrucklidge.m` from "Modeling Dynamical Systems for 3D Printing”, Notices of the AMS, 2020 by Stephen K. Lucas, Evelyn Sander, and Laura Taalman (http://math.gmu.edu/~sander/EvelynSite/supplementary-materials-for.html)
      
     
 Some features added in the port: 
 1. dynamical system descriptions are encapsulated in `dynamical_system` base class.
-2. arclength extension to the system equation are in `dynamical_system` base class, i.e. in the definition of the dynamical system inherited from the base class only the original system equations need to be defined.
+2. arclength extension to the system equations are in `dynamical_system` base class, i.e. in the definition of the dynamical system inherited from the base class only the original system equations need to be defined.
 3. use scipy `minimize` module rather than the secant method to find the time when a certain length of the trajectory curve is reached.
 4. dynamical system is run from T0 to T once and the final state are used as the initial conditions for the data output to ensure the initial state is near the chaotic attractor.
 
