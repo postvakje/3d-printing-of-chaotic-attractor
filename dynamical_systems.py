@@ -116,4 +116,34 @@ class rossler_hyperchaos(dynamical_system):
         y[1]=x[0]+self.a*x[1]+x[3]
         y[2]=self.b+x[0]*x[2]
         y[3]=-self.c*x[2]+self.d*x[3]
-        return y    
+        return y   
+
+class hyperchaotic_circuit(dynamical_system):
+    """ 4 dimensioanl hyperchaotic circuit with a chaotic attractor.
+        T. Matsumoto, L. O. Chua, and K. Kobayashi, 
+        "Hyperchaos: Laboratory experiment and numerical confirmation," 
+        IEEE Transactions on Circuits and Systems, 
+        vol. 33, pp. 1143-1147, Nov. 1986.
+    """    
+    def __init__(self):
+        self.C1 = 0.5
+        self.C2 = 0.05
+        self.L1 = 1
+        self.L2 = 2/3
+        self.R = 1
+        self.a = -0.2
+        self.b = 3
+        self.startT = 0
+        self.endT = 200
+        self.init = [0.1,0.2,0.03,0.4]
+       
+    def f(self,x):
+        return self.b*x+0.5*(self.a-self.b)*(abs(x+1)-abs(x-1))
+    
+    def system_equations(self,t,x):
+        y = np.zeros((4,1)) 
+        y[0] = 1/self.C1*(self.f(x[1]-x[0])-x[2])
+        y[1] = 1/self.C2*(-self.f(x[1]-x[0])-x[3])
+        y[2] = 1/self.L1*(x[0]+self.R*x[2])
+        y[3] = 1/self.L2*x[1]
+        return y     
