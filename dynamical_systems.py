@@ -77,7 +77,7 @@ class nonauto_chaotic_system(dynamical_system):
         self.A = 0.5
         self.beta = 0.895
         self.startT = 0
-        self.endT=100*np.pi/self.omega # T is the total time
+        self.endT=100*np.pi/self.omega
         self.init=[-9.6, 5.9, 0.38]
 
     def f(self,x):
