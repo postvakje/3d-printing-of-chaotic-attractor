@@ -18,7 +18,9 @@ The main file is `run_dynamical_system.py`. Put both files `run_dynamical_system
 
 I will add more in the future.
 
-The hyperchaotic Rossler system (`rossler_hyperchaos`) is a 4-dimensional dynamical system, but only the first 3 coordinates of the state vector are saved to the data file. A periodically driven nonautonomous chaotic system `nonauto_chaotic_system` is also included.
+The hyperchaotic Rossler system (`rossler_hyperchaos`) and the hyperchaotic circuit (`hyperchaotic_circuit`) are 4-dimensional dynamical systems, but only the first 3 coordinates of the state vector are saved to the data file.
+
+A periodically driven nonautonomous 2-dimensional chaotic system `nonauto_chaotic_system` is also included. The 2-dimensional state vector along with the time t are mapped to a 3-dimensional state.
 
 To switch dynamical systems, change the line `system=nonauto_chaotic_system()` in `run_dynamical_system.py` to another system.
 
