@@ -119,7 +119,7 @@ class rossler_hyperchaos(dynamical_system):
         return y   
 
 class hyperchaotic_circuit(dynamical_system):
-    """ 4 dimensioanl hyperchaotic circuit with a chaotic attractor.
+    """ 4 dimensional hyperchaotic circuit with a chaotic attractor.
         T. Matsumoto, L. O. Chua, and K. Kobayashi, 
         "Hyperchaos: Laboratory experiment and numerical confirmation," 
         IEEE Transactions on Circuits and Systems, 
