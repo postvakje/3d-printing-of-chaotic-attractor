@@ -18,7 +18,7 @@
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.optimize import minimize
-from dynamical_systems import chua_oscillator, rucklidge, nonauto_chaotic_system, rossler_hyperchaos, hyperchaotic_circuit 
+from dynamical_systems import chua_oscillator, rucklidge, nonauto_chaotic_system, rossler_hyperchaos, hyperchaotic_circuit, lorenz
 import matplotlib.pyplot as plt
 
 def solve_for_length(sol,s,p0):

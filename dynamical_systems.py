@@ -147,3 +147,23 @@ class hyperchaotic_circuit(dynamical_system):
         y[2] = 1/self.L1*(x[0]+self.R*x[2])
         y[3] = 1/self.L2*x[1]
         return y     
+
+class lorenz(dynamical_system):
+    """ 3 dimensioanl dynamical system with a chaotic attractor.
+        E. N. Lorenz, "Deterministic nonperiodic flow,"
+        Journal of the Atmospheric Sciences, vol. 20, no. 2, pp. 130–141, 1963.
+    """    
+    def __init__(self):
+        self.sigma = 10.0
+        self.rho = 28.0
+        self.beta = 8.0/3.0
+        self.startT = 0
+        self.endT = 30
+        self.init = [0.1,0.1,0.1]
+       
+    def system_equations(self,t,x):
+        y = np.zeros((3,1)) 
+        y[0] = self.sigma*(x[1] - x[0])
+        y[1] = x[0]*(self.rho - x[2]) - x[1]
+        y[2] = x[0]*x[1]-self.beta*x[2]
+        return y
