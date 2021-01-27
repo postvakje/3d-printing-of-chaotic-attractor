@@ -32,14 +32,13 @@ def solve_for_length(sol,s,p0):
 
 output_filename = 'chaotic_attractor_out.txt'
 
-system = nonauto_chaotic_system()
+system = nonauto_chaotic_system() # select dynamical system
 
 NUM=1000 # NUM is the initial number of
          # pieces of equal arc length
 
-T0 = system.startT # T0 is the starting time
-T = system.endT # T is the ending time
-init = system.init # initial conditions
+T0, T = system.get_Tinterval() # T0 is the starting time, T is the ending time
+init = system.get_init() # initial conditions
 l = len(init)
 # run system from T0 to T and use ending state as initial conditions
 init = list(solve_ivp(system.system_equations_ext,(T0,T),init+[0]).y[:-1,-1]) # solve the system, initial length=0

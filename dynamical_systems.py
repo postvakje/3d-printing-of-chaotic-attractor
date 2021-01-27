@@ -11,7 +11,13 @@ class dynamical_system:
         """ dynamical system equations extended with arc length
         """
         y = self.system_equations(t,x)
-        return np.append(y,np.linalg.norm(y))
+        return np.append(y,np.linalg.norm(y[:3]))
+    def get_init(self):
+        """ get initial conditions """
+        return self.init
+    def get_Tinterval(self):
+        """ get starting and ending time """
+        return self.startT, self.endT
 
 class chua_oscillator(dynamical_system):
     """ 3 dimensioanl dynamical system with a chaotic attractor.
@@ -230,3 +236,4 @@ class brockett(dynamical_system):
         y[1] = x[2]
         y[2] = -self.f(x[0])-self.a*x[1]-x[2]
         return y
+
