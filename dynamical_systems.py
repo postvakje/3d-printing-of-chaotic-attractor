@@ -149,7 +149,7 @@ class hyperchaotic_circuit(dynamical_system):
         return y     
 
 class lorenz(dynamical_system):
-    """ 3 dimensioanl dynamical system with a chaotic attractor.
+    """ 3 dimensional dynamical system with a chaotic attractor.
         E. N. Lorenz, "Deterministic nonperiodic flow,"
         Journal of the Atmospheric Sciences, vol. 20, no. 2, pp. 130–141, 1963.
     """    
@@ -166,4 +166,70 @@ class lorenz(dynamical_system):
         y[0] = self.sigma*(x[1] - x[0])
         y[1] = x[0]*(self.rho - x[2]) - x[1]
         y[2] = x[0]*x[1]-self.beta*x[2]
+        return y
+    
+class chen(dynamical_system):
+    """ 3 dimensional dynamical system with a chaotic attractor.
+        G. Chen and T. Ueta, "Yet another chaotic attractor,"
+        International Journal of Bifurcation and Chaos, vol. 9, no. 7, pp. 1465–1466, 1999.
+    """    
+    def __init__(self):
+        self.a = 40.0
+        self.b = 3.0
+        self.c = 28.0
+        self.startT = 0
+        self.endT = 30
+        self.init = [-0.1,0.5,0.6]
+       
+    def system_equations(self,t,x):
+        y = np.zeros((3,1)) 
+        y[0] = self.a*(x[1] - x[0])
+        y[1] = (self.c-self.a)*x[0] - x[0]*x[2] +self.c*x[1]
+        y[2] = x[0]*x[1]-self.b*x[2]
+        return y
+
+class arneodo(dynamical_system):
+    """ 3 dimensional dynamical system with a chaotic attractor.
+        A. Arneodo, P. Coullet, and E. A. Spiegel, "Chaos in a finite macroscopicsystem," 
+        Physics Letters, vol. 92A, no. 8, pp. 369-373, 1982.
+    """    
+    def __init__(self):
+        self.mu = -1.0
+        self.mu0 = -5.5
+        self.mu1 = 3.5
+        self.mu2 = 1.0
+        self.startT = 0
+        self.endT = 200
+        self.init = [0.2,0.2,-0.75]
+       
+    def system_equations(self,t,x):
+        y = np.zeros((3,1)) 
+        y[0] = x[1]
+        y[1] = x[2]
+        y[2] = self.mu*x[0]**3-self.mu0*x[0]-self.mu1*x[1]-self.mu2*x[2]
+        return y
+       
+class brockett(dynamical_system):
+    """ 3 dimensional dynamical system with a chaotic attractor.
+        R. W. Brockett, "On conditions leading to chaos in feedback systems,"
+        Proceedings of the IEEE Conference on decision and control, pp. 932-936, 1982.
+    """      
+    def __init__(self):
+        self.k = 1.8
+        self.a = 1.25
+        self.startT = 0
+        self.endT = 300
+        self.init = [1.31, 0.57, 0.32]
+
+    def sgn(self,x):
+        return 1 if x > 0 else (-1 if x < 0 else 0)
+    
+    def f(self,x):
+        return -self.k*x if abs(x) <= 1 else 2*self.k*x-3*self.k*self.sgn(x)
+       
+    def system_equations(self,t,x):
+        y = np.zeros((3,1)) 
+        y[0] = x[1]
+        y[1] = x[2]
+        y[2] = -self.f(x[0])-self.a*x[1]-x[2]
         return y
