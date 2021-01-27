@@ -213,19 +213,16 @@ class brockett(dynamical_system):
     """ 3 dimensional dynamical system with a chaotic attractor.
         R. W. Brockett, "On conditions leading to chaos in feedback systems,"
         Proceedings of the IEEE Conference on decision and control, pp. 932-936, 1982.
-    """      
+    """    
     def __init__(self):
         self.k = 1.8
         self.a = 1.25
         self.startT = 0
         self.endT = 300
         self.init = [1.31, 0.57, 0.32]
-
-    def sgn(self,x):
-        return 1 if x > 0 else (-1 if x < 0 else 0)
     
     def f(self,x):
-        return -self.k*x if abs(x) <= 1 else 2*self.k*x-3*self.k*self.sgn(x)
+        return -self.k*x if abs(x) <= 1 else 2*self.k*x-3*self.k*np.sign(x)
        
     def system_equations(self,t,x):
         y = np.zeros((3,1)) 
