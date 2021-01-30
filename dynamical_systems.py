@@ -20,7 +20,7 @@ class dynamical_system:
         return self.startT, self.endT
 
 class chua_oscillator(dynamical_system):
-    """ 3 dimensioanl dynamical system with a chaotic attractor.
+    """ 3 dimensional dynamical system with a chaotic attractor.
         L. O. Chua, C. W. Wu, A. Huang, and G.-Q. Zhong, 
         "A universal circuit for studying and generating chaos part I: Routes to chaos," 
         IEEE Transactions on Circuits and Systems-I: Fundamental Theory and Applications, 
