@@ -18,7 +18,7 @@
 import numpy as np
 from scipy.integrate import solve_ivp
 from scipy.optimize import minimize
-from dynamical_systems import chua_oscillator, rucklidge, nonauto_chaotic_system, rossler_hyperchaos, hyperchaotic_circuit, lorenz, chen, arneodo, brockett
+from dynamical_systems import *
 import matplotlib.pyplot as plt
 
 def solve_for_length(sol,s,p0):
@@ -39,11 +39,13 @@ NUM=1000 # NUM is the initial number of
 
 T0, T = system.get_Tinterval() # T0 is the starting time, T is the ending time
 init = system.get_init() # initial conditions
+method = system.get_integration_method() # integration method
+
 l = len(init)
 # run system from T0 to T and use ending state as initial conditions
-init = list(solve_ivp(system.system_equations_ext,(T0,T),init+[0]).y[:-1,-1]) # solve the system, initial length=0
+init = list(solve_ivp(system.system_equations_ext,(T0,T),init+[0],method=method).y[:-1,-1]) # solve the system, initial length=0
 # y is the solution at a given time
-sol = solve_ivp(system.system_equations_ext,(T0,T),init+[0],dense_output=True).sol
+sol = solve_ivp(system.system_equations_ext,(T0,T),init+[0],dense_output=True,method=method).sol
 y=sol(T)
 arclen=y[-1] # arclen is the length of the curve
 # Initialize data arrays, pos is position

@@ -7,6 +7,7 @@ Created on Mon Nov 30 15:16:47 2020
 import numpy as np
 
 class dynamical_system:
+    integration_method = 'RK45' # default integration method
     def system_equations_ext(self,t,x):
         """ dynamical system equations extended with arc length
         """
@@ -18,6 +19,9 @@ class dynamical_system:
     def get_Tinterval(self):
         """ get starting and ending time """
         return self.startT, self.endT
+    def get_integration_method(self):
+        """ get integration method """
+        return self.integration_method
 
 class chua_oscillator(dynamical_system):
     """ 3 dimensional dynamical system with a chaotic attractor.
@@ -140,8 +144,8 @@ class hyperchaotic_circuit(dynamical_system):
         self.a = -0.2
         self.b = 3
         self.startT = 0
-        self.endT = 200
-        self.init = [0.1,0.2,0.03,0.4]
+        self.endT = 500
+        self.init = [-1,0.4,0.3,-1.8]
        
     def f(self,x):
         return self.b*x+0.5*(self.a-self.b)*(abs(x+1)-abs(x-1))
@@ -237,3 +241,25 @@ class brockett(dynamical_system):
         y[2] = -self.f(x[0])-self.a*x[1]-x[2]
         return y
 
+class sparrow(dynamical_system):
+    """ 3 dimensional dynamical system with a chaotic attractor.
+        C. T. Sparrow, "Chaos in a Three-Dimensional Single Loop Feedback System
+        with a Piecewise Linear Feedback Function,"
+        Journal of Mathematical Analysis and Applications, vol. 83, pp. 275-291, 1981.
+    """    
+    def __init__(self):
+        self.r = 19.0
+        self.integration_method = 'DOP853'
+        self.startT = 0
+        self.endT = 50
+        self.init = [0.36,0.24,0.30]
+    
+    def f(self,x):
+        return -8.4*x+3.35 if x <= 3/7 else 8.4*self.r*x -0.25 -3.6*self.r
+       
+    def system_equations(self,t,x):
+        y = np.zeros((3,1)) 
+        y[0] = self.f(x[2])-x[0]
+        y[1] = x[0]-x[1]
+        y[2] = x[1]-x[2]
+        return y

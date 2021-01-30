@@ -9,7 +9,7 @@ Some features added in the port:
 4. dynamical system is run from T0 to T once and the final state are used as the initial conditions for the data output to ensure the initial state is near the chaotic attractor.
 
 ## How to use
-The main file is `run_dynamical_system.py`. Put both files `run_dynamical_system.py` and `dynamical_systems.py` in the same directory. Run the file `run_dynamical_system.py` to generate an output file of data points. 9 dynamical systems are currently defined in `dynamical_systems.py`: 
+The main file is `run_dynamical_system.py`. Put both files `run_dynamical_system.py` and `dynamical_systems.py` in the same directory. Run the file `run_dynamical_system.py` to generate an output file of data points. 10 dynamical systems are currently defined in `dynamical_systems.py`: 
 1. `chua_oscillator`
 2. `rucklidge`
 3. `nonauto_chaotic_system`
@@ -18,7 +18,8 @@ The main file is `run_dynamical_system.py`. Put both files `run_dynamical_system
 6. `lorenz`
 7. `chen`
 8. `arneodo`
-9. `brockett`. 
+9. `brockett`
+10. `sparrow`. 
 
 I will add more in the future.
 
