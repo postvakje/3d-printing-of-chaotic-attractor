@@ -263,3 +263,61 @@ class sparrow(dynamical_system):
         y[1] = x[0]-x[1]
         y[2] = x[1]-x[2]
         return y
+    
+class shinriki(dynamical_system):
+    """ 3 dimensional dynamical system with a chaotic attractor.
+        M. Shinriki, M. Yamamoto, and S. Mori, "Multimode oscillations in a
+        modified van der Pol oscillator containing a positive nonlinear conductance,"
+        Proceedings of the IEEE, vol. 69, pp. 394-395, Mar 1981.
+    """    
+    def __init__(self):
+        self.C0 = 4.7e-9
+        self.C = 0.1e-6
+        self.G1 = 1.0/38000
+        self.G2 = 3.813851e-6
+        self.L = 1.0/6
+        self.a1 = 11.0e-5
+        self.a3 = 5.7210e-6
+        self.b1 = 1.52554e-5
+        self.b3 = 4.76731e-5
+        self.integration_method = 'BDF'
+        self.startT = 0
+        self.endT = 0.05
+        self.init = [0.903,-0.284,0.000482]
+       
+    def system_equations(self,t,x):
+        y = np.zeros((3,1)) 
+        y[0] = (-self.G1*x[0]+self.a1*x[0]-self.a3*x[0]**3 + self.b1*(x[1]-x[0])+self.b3*(x[1]-x[0])**3)/self.C0
+        y[1] = (-x[2]-self.G2*x[1]-self.b1*(x[1]-x[0])-self.b3*(x[1]-x[0])**3)/self.C
+        y[2] = x[1]/self.L
+        return y
+    
+class dmitriev(dynamical_system):
+    """ 3 dimensional dynamical system with a chaotic attractor.
+        A. S. Dmitriev and V. Y. Koslov, "Stochastic oscillations in a self-excited
+        oscillator with a first-order inertial delay," Radiotekhnika i electronika,
+        vol. 29, p. 2389, 1984.
+    """    
+    def __init__(self):
+        self.alpha = 16.0
+        self.delta = 0.43
+        self.gamma = 0.1
+        self.sigma = 0.71
+        self.startT = 0
+        self.endT = 100
+        self.init = [0.22, 0.48, 0.98]
+      
+    def f(self,x):
+        if abs(x) <= 1.2:
+            return self.alpha*x*(1-x**2)
+        elif x < -1.2:
+            return 0.528*self.alpha
+        else:
+            return -0.528*self.alpha
+        
+    def system_equations(self,t,x):
+        y = np.zeros((3,1)) 
+        y[0] = x[1]
+        y[1] = -x[0]-self.delta*x[1]+x[2]
+        y[2] = self.gamma*(self.f(x[0])-x[2])-self.sigma*x[1]
+        return y
