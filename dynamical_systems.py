@@ -45,7 +45,7 @@ class chua_oscillator(dynamical_system):
         return self.b*x+0.5*(self.a-self.b)*(abs(x+1)-abs(x-1))
     
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0] = self.k*self.alpha*(x[1]-x[0]-self.f(x[0]))
         y[1] = self.k*(x[0]-x[1]+x[2])
         y[2] = self.k*(-self.beta*x[1]-self.gamma*x[2])
@@ -65,7 +65,7 @@ class rucklidge(dynamical_system):
         self.init = [1,0,4.5]
     
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0]=self.kappa*x[0]-self.lambdaparam*x[1]-x[1]*x[2]
         y[1]=x[0]
         y[2]= -x[2]+x[1]**2
@@ -94,7 +94,7 @@ class nonauto_chaotic_system(dynamical_system):
         return self.b*x+0.5*(self.a-self.b)*(abs(x+1)-abs(x-1))
 
     def system_equations(self,t,x): 
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         s = self.A*np.sin(self.omega*t)
         if np.abs(np.cos(self.omega*t)) > 0.1:
             xp = x[1]/np.cos(self.omega*t)
@@ -121,7 +121,7 @@ class rossler_hyperchaos(dynamical_system):
         self.init = [-10,-6,0,10]
     
     def system_equations(self,t,x):
-        y = np.zeros((4,1)) 
+        y = np.zeros((4,)) 
         y[0]=-x[1]-x[2]
         y[1]=x[0]+self.a*x[1]+x[3]
         y[2]=self.b+x[0]*x[2]
@@ -144,14 +144,14 @@ class hyperchaotic_circuit(dynamical_system):
         self.a = -0.2
         self.b = 3
         self.startT = 0
-        self.endT = 500
+        self.endT = 2500
         self.init = [-1,0.4,0.3,-1.8]
        
     def f(self,x):
         return self.b*x+0.5*(self.a-self.b)*(abs(x+1)-abs(x-1))
     
     def system_equations(self,t,x):
-        y = np.zeros((4,1)) 
+        y = np.zeros((4,)) 
         y[0] = 1/self.C1*(self.f(x[1]-x[0])-x[2])
         y[1] = 1/self.C2*(-self.f(x[1]-x[0])-x[3])
         y[2] = 1/self.L1*(x[0]+self.R*x[2])
@@ -192,7 +192,7 @@ class chen(dynamical_system):
         self.init = [-0.1,0.5,0.6]
        
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0] = self.a*(x[1] - x[0])
         y[1] = (self.c-self.a)*x[0] - x[0]*x[2] +self.c*x[1]
         y[2] = x[0]*x[1]-self.b*x[2]
@@ -200,7 +200,7 @@ class chen(dynamical_system):
 
 class arneodo(dynamical_system):
     """ 3 dimensional dynamical system with a chaotic attractor.
-        A. Arneodo, P. Coullet, and E. A. Spiegel, "Chaos in a finite macroscopicsystem," 
+        A. Arneodo, P. Coullet, and E. A. Spiegel, "Chaos in a finite macroscopic system," 
         Physics Letters, vol. 92A, no. 8, pp. 369-373, 1982.
     """    
     def __init__(self):
@@ -213,7 +213,7 @@ class arneodo(dynamical_system):
         self.init = [0.2,0.2,-0.75]
        
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0] = x[1]
         y[1] = x[2]
         y[2] = self.mu*x[0]**3-self.mu0*x[0]-self.mu1*x[1]-self.mu2*x[2]
@@ -235,7 +235,7 @@ class brockett(dynamical_system):
         return -self.k*x if abs(x) <= 1 else 2*self.k*x-3*self.k*np.sign(x)
        
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0] = x[1]
         y[1] = x[2]
         y[2] = -self.f(x[0])-self.a*x[1]-x[2]
@@ -258,7 +258,7 @@ class sparrow(dynamical_system):
         return -8.4*x+3.35 if x <= 3/7 else 8.4*self.r*x -0.25 -3.6*self.r
        
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0] = self.f(x[2])-x[0]
         y[1] = x[0]-x[1]
         y[2] = x[1]-x[2]
@@ -286,7 +286,7 @@ class shinriki(dynamical_system):
         self.init = [0.903,-0.284,0.000482]
        
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0] = (-self.G1*x[0]+self.a1*x[0]-self.a3*x[0]**3 + self.b1*(x[1]-x[0])+self.b3*(x[1]-x[0])**3)/self.C0
         y[1] = (-x[2]-self.G2*x[1]-self.b1*(x[1]-x[0])-self.b3*(x[1]-x[0])**3)/self.C
         y[2] = x[1]/self.L
@@ -316,8 +316,9 @@ class dmitriev(dynamical_system):
             return -0.528*self.alpha
         
     def system_equations(self,t,x):
-        y = np.zeros((3,1)) 
+        y = np.zeros((3,)) 
         y[0] = x[1]
         y[1] = -x[0]-self.delta*x[1]+x[2]
         y[2] = self.gamma*(self.f(x[0])-x[2])-self.sigma*x[1]
         return y
+    
